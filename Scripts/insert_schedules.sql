@@ -1,4 +1,3 @@
---TODO: insert schedules for routes 2 and 3
 INSERT INTO public.schedules (route_id, trip_id, stop_id, expected_time) VALUES
 (1,1,1,'5:15am'),
 (1,1,2,'5:30am'),
