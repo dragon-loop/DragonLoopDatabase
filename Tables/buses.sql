@@ -24,6 +24,7 @@ CREATE TABLE public.buses
     route_id integer NOT NULL,
     trip_id integer NOT NULL,
     imei bigint NOT NULL,
+    inactive_flag boolean NOT NULL,
     last_stop_id integer,
     last_stop_time time without time zone,
     CONSTRAINT bus_pkey PRIMARY KEY (bus_id),
