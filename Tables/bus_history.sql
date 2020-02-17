@@ -24,14 +24,6 @@ CREATE TABLE IF NOT EXISTS public.bus_history
     y_coordinate numeric NOT NULL,
     route_id integer NOT NULL,
     CONSTRAINT bus_history_pkey PRIMARY KEY (bus_history_id),
-    CONSTRAINT route_id_fkey FOREIGN KEY (route_id)
-        REFERENCES public.routes (route_id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT,
-    CONSTRAINT bus_id_fkey FOREIGN KEY (bus_id)
-        REFERENCES public.buses (bus_id) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT
 )
 WITH (
     OIDS = FALSE
@@ -40,3 +32,23 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.bus_history
     OWNER to postgres;
+
+DROP FUNCTION add_bus_history();
+CREATE OR REPLACE FUNCTION add_bus_history() RETURNS TRIGGER AS
+$$
+BEGIN
+    INSERT INTO
+        public.bus_history(bus_id, route_id, x_coordinate, y_coordinate)
+        VALUES(NEW.bus_id, NEW.route_id, NEW.x_coordinate, NEW.y_coordinate);
+    
+    RETURN NEW;
+END;
+$$
+language plpgsql;
+
+DROP TRIGGER IF EXISTS add_bus_history_trigger ON public.buses;
+CREATE TRIGGER add_bus_history_trigger
+     AFTER UPDATE OF x_coordinate, y_coordinate ON public.buses
+     FOR EACH ROW
+     EXECUTE PROCEDURE add_bus_history();
+
