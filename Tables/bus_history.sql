@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS public.bus_history
     x_coordinate numeric NOT NULL,
     y_coordinate numeric NOT NULL,
     route_id integer NOT NULL,
-    CONSTRAINT bus_history_pkey PRIMARY KEY (bus_history_id),
+    CONSTRAINT bus_history_pkey PRIMARY KEY (bus_history_id)
 )
 WITH (
     OIDS = FALSE
@@ -48,7 +48,7 @@ language plpgsql;
 
 DROP TRIGGER IF EXISTS add_bus_history_trigger ON public.buses;
 CREATE TRIGGER add_bus_history_trigger
-     AFTER UPDATE OF x_coordinate, y_coordinate ON public.buses
+     AFTER INSERT OR UPDATE OF x_coordinate, y_coordinate ON public.buses
      FOR EACH ROW
      EXECUTE PROCEDURE add_bus_history();
 
