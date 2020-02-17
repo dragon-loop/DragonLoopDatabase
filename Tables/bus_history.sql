@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS public.bus_history
     CONSTRAINT route_id_fkey FOREIGN KEY (route_id)
         REFERENCES public.routes (route_id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE RESTRICT
+        ON DELETE RESTRICT,
     CONSTRAINT bus_id_fkey FOREIGN KEY (bus_id)
-        REFERENCES public.busses (bus_id) MATCH SIMPLE
+        REFERENCES public.buses (bus_id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 )
