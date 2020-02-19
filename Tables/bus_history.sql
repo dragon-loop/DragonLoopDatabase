@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS public.bus_history
     x_coordinate numeric NOT NULL,
     y_coordinate numeric NOT NULL,
     route_id integer NOT NULL,
+    time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT bus_history_pkey PRIMARY KEY (bus_history_id)
 )
 WITH (
