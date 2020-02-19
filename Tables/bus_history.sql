@@ -10,7 +10,7 @@ CREATE SEQUENCE public.bus_history_bus_history_id_seq
     CACHE 1;
 
 ALTER SEQUENCE public.bus_history_bus_history_id_seq
-    OWNER TO postgres;
+    OWNER TO admin;
 
 -- Table: public.bus_history
 
@@ -32,7 +32,7 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.bus_history
-    OWNER to postgres;
+    OWNER to admin;
 
 DROP FUNCTION add_bus_history();
 CREATE OR REPLACE FUNCTION add_bus_history() RETURNS TRIGGER AS
