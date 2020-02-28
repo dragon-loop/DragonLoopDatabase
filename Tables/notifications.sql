@@ -6,7 +6,7 @@ CREATE TABLE public.notifications
 (
     notification_id integer NOT NULL DEFAULT nextval('notifications_notification_id_seq'::regclass),
     message text COLLATE pg_catalog."default" NOT NULL,
-    notification_datetime timestamp without time zone NOT NULL,
+    notification_datetime timestamp(6) with time zone NOT NULL,
     CONSTRAINT notifications_pkey PRIMARY KEY (notification_id)
 )
 WITH (
